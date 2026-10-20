@@ -1,5 +1,16 @@
-def validar_email(email:str):
-    """Validação inicial simplificada (intencionalmente incompleta)."""
-    return isinstance(email, str) and "@" in email
+def validar_email(email: str) -> bool:
+    if not isinstance(email, str):
+        return False
 
-# TODO: Implementar validação de email mais robusta, incluindo verificação de domínio e formato adequado.
+    if " " in email or email.count("@") != 1:
+        return False
+
+    usuario, dominio = email.split("@")
+    partes_dominio = dominio.split(".")
+
+    return (
+        usuario != ""
+        and dominio != ""
+        and len(partes_dominio) >= 2
+        and all(partes_dominio)
+    )
